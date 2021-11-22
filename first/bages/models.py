@@ -14,6 +14,7 @@ Add models to admin site
 # Create message model
 class Message(models.Model):
     msg = models.TextField()
+    
     def __str__(self):
         return self.msg
 
