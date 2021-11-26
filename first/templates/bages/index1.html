@@ -1,0 +1,24 @@
+
+{% extends 'bages/base.html' %}
+
+
+{% block content %}
+
+{% for x in ppl  %}
+<h1>
+{{ x.name }}
+</h1>
+<h1>
+ {{x.date}}
+</h1>
+{% endfor %}
+
+{% for y in msg %}
+<h1>
+{{ y.msg }}
+</h1>
+
+{% endfor %}
+ 
+
+{% endblock content %}

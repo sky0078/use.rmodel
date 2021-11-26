@@ -1,0 +1,20 @@
+
+{% extends 'bages/base.html' %}
+
+{% block content %}
+<span><a href="{% url 'user' %} ">  users  </a></span>
+
+<span> <a href="{% url 'mesages' %}"> msgs </a></span>
+
+<form method = "POST">
+    {% csrf_token %}  
+<br>
+<input type = " test " name = "your Name" placeholder="= enter ur Name">
+<br>
+<input type = " test " name = "your msg" placeholder="= enter ur msg">
+<br>
+<input type = "submit" value  = "Save your Msg">
+
+</form>
+
+{% endblock content %}
