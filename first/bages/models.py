@@ -1,6 +1,10 @@
 from django.db import models
- 
-# Create your models here.
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+
+
 
 # Create user model ( see how to extend user model - 3 ways ) find the best to our case.
 # Create message model
@@ -12,25 +16,26 @@ from django.db import models
  
 
 # Create message model
-class Message(models.Model):
-    msg = models.TextField()
+       
     
+
+class Messages(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    msgs = models.TextField(blank=True)
     def __str__(self):
         return self.msg
     
 
-# Create user model
-class User(models.Model):
-    name = models.CharField(max_length=25 , null = True)
-    active = models.BooleanField(default= False)
-    date = models.DateTimeField(null = True)
+@receiver(post_save, sender=User)
+def create_user_Messages(sender, instance, created, **kwargs):
+    if created:
+        Messages.objects.create(user=instance)
 
-    sms = models.ForeignKey(Message, on_delete = models.CASCADE)
-   
-   
-    def __str__(self):
+@receiver(post_save, sender=User)
+def save_user_Messages(sender, instance, **kwargs):
+    instance.messages.save()
+ 
 
-        return self.name
     
     class Meta:
         ordering = ['name']
