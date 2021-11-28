@@ -1,12 +1,12 @@
 from django.http import request
 from django.shortcuts import render
-from . models import User, Message, Write_msg
+from . models import  Messages, Write_msg
 
 # Create your views here.
 
  
 
-
+# we might not need def user 
 def user (request):
     return render(request,'bages/index1.html' , {'ppl' : User.objects.all() })
 
